@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <script src="js/vue.js"></script>
+  <title></title>
+</head>
+<body>
+
+<div id="example">
+  <!-- 循环-->
+  <ul>
+    <li v-for="tmp in list">
+      <p>{{tmp}}</p>
+    </li>
+  </ul>
+  <ul>
+    <li v-for="(value,key) in list">
+      <p>{{"key is "+key+" value is "+value}}</p>
+    </li>
+  </ul>
+  <!-- 选择/判断-->
+  <button v-if="hasMore">加载更多</button>
+  <p v-if="!hasMore">没有更多数据可以加载了</p>
+  <!-- 判断的分支结构的使用-->
+  <p v-if="rightAnswer == 0">答案是0</p>
+  <p v-else-if="rightAnswer == 1">答案是1</p>
+  <p v-else-if="rightAnswer == 2">答案是2</p>
+
+  <!-- v-text v-html v-show -->
+  <div v-html="myHtml">it is a container</div>
+  <p v-show="hasMore">this is v-show directive</p>
+
+  <!-- 属性绑定 -->
+  <img v-bind:src="'./img/'+imgName" alt=""/>
+  <img v-bind:src="nowImageName" alt=""/>
+  <!-- 要将urlName所对应的值绑定到a的href-->
+  <a v-bind:href="urlName">达内</a>
+  <!-- 属性绑定支持一个简写-->
+  <a :href="urlName">达内</a>
+
+  <!-- 按钮绑定点击处理函数-->
+  <button v-on:click="handleClick">
+    clickMe
+  </button>
+  <!-- 事件绑定的简写方式-->
+  <button @click="handleClick">
+    clickMe
+  </button>
+  <input type="text" @change="handleChange"/>
+</div>
+
+<script>
+  new Vue({
+    el:'#example',
+    data:{
+      urlName:'http://www.tedu.cn',
+      list:[100,200,300],
+      stu:{age:20,sex:2,score:80},
+      hasMore:false,
+      rightAnswer:2,
+      myHtml:'<h1>it is my header</h1>',
+      imgName:'2.jpg',
+      nowImageName:'3.jpg'
+    },
+    methods:{
+      handleClick:function(){
+        console.log('btn is clicked');
+      },
+      handleChange:function(event){
+        //当用户的输入发生变化时，在控制台输出对应的数据
+        console.log(event.target.value);
+      }
+    }
+  })
+</script>
+
+
+</body>
+</html>
